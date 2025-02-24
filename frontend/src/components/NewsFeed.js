@@ -98,7 +98,7 @@ const NewsFeed = () => {
   const dispatch = useDispatch();
   const { trendingNews } = useSelector((state) => state.news);
 
-  const socket = io("http://localhost:5000"); // Socket connection to backend
+  const socket = io("https://task-backend-s9et.onrender.com"); // Socket connection to backend
 
   // Fetch trending news for selected categories
   const fetchTrendingNews = async () => {
@@ -106,7 +106,7 @@ const NewsFeed = () => {
     const categoryQuery = categories.length > 0 ? categories.join(",") : "all"; // "all" means fetch all categories
 
     try {
-      const response = await fetch(`http://localhost:5000/api/news/trending?category=${categoryQuery}`);
+      const response = await fetch(`https://task-backend-s9et.onrender.com/api/news/trending?category=${categoryQuery}`);
       const data = await response.json();
       if (Array.isArray(data) && data.length > 0) {
         dispatch(setTrendingNews(data)); // Dispatch to Redux
@@ -132,7 +132,7 @@ const NewsFeed = () => {
   const subscribeToCategory = async (category) => {
     const userId = "user123"; // Hardcoded for simplicity
     try {
-      await fetch("http://localhost:5000/api/news/subscribe", {
+      await fetch("https://task-backend-s9et.onrender.com/api/news/subscribe", {
         method: "POST",
         body: JSON.stringify({ userId, category }),
         headers: { "Content-Type": "application/json" },
